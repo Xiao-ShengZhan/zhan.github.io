@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>小型應用程式</title>
+  <style>
+    body {
+      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      background-color: #f0f2f5;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      line-height: 1.8;
+    }
+
+    header {
+      background-color: #3a7bd5;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 34px;
+      letter-spacing: 1.5px;
+    }
+
+    .content {
+      padding: 50px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: 26px;
+      color: #2b5fa2;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    section {
+      margin-bottom: 60px;
+    }
+
+    .image-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .image-grid figure {
+      flex: 1 1 45%;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .image-grid figure:hover {
+      transform: translateY(-5px);
+    }
+
+    .image-grid img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    figcaption {
+      font-size: 17px;
+      color: #444;
+      font-weight: 500;
+      text-align: left;
+    }
+
+    .video-section {
+      background-color: #fff;
+      padding: 30px 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .video-section video {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .video-caption {
+      font-size: 17px;
+      color: #444;
+      font-weight: 500;
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    @media (max-width: 768px) {
+      .image-grid figure {
+        flex: 1 1 100%;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
+      figcaption, .video-caption {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>小型應用程式</h1>
+  </header>
+
+  <div class="content">
+
+    <h2>學習成果展示</h2>
+
+    <!-- 圖片展示區 -->
+    <section class="image-grid">
+      <figure>
+        <img src="gg.png" alt="應用程式主畫面">
+        <figcaption>這是我設計的應用程式主畫面，主要功能是與另一台電腦進行資料傳輸與接收。</figcaption>
+      </figure>
+      <figure>
+        <img src="gg1.png" alt="程式碼畫面 1">
+        <figcaption>程式碼範例 1：這部分負責初始化傳輸流程與基本連線設定。</figcaption>
+      </figure>
+      <figure>
+        <img src="gg2.png" alt="程式碼畫面 2">
+        <figcaption>程式碼範例 2：這裡處理接收資料時的解析流程與安全驗證。</figcaption>
+      </figure>
+      <figure>
+        <img src="gg3.png" alt="程式碼畫面 3">
+        <figcaption>程式碼範例 3：最後負責將資料寫入目的端，並顯示執行狀態。</figcaption>
+      </figure>
+    </section>
+
+    <!-- 影片展示區 -->
+    <section class="video-section">
+      <video controls>
+        <source src="tank.mp4" type="video/mp4">
+      </video>
+      <div class="video-caption">
+        這段影片展示了我設計的一款戰車遊戲。在這個專案中，我負責音樂設計、砲彈模型建立，以及整體遊戲畫面美化與特效處理，讓遊戲體驗更加完整與生動。
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>

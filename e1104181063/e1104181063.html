@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>E1104181063 - 蕭聖展</title>
+  <style>
+    /* 字體與基礎設定 */
+    body {
+      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      background-color: var(--bg-color);
+      margin: 0;
+      padding: 0;
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
+      scroll-behavior: smooth;
+    }
+    :root {
+      --primary-color: #4a90e2;
+      --bg-color: #f5f7fa;
+      --text-color: #333;
+      --card-bg: #fff;
+      --card-shadow: rgba(0,0,0,0.1);
+    }
+    [data-theme="dark"] {
+      --primary-color: #1e90ff;
+      --bg-color: #121212;
+      --text-color: #eee;
+      --card-bg: #1f1f1f;
+      --card-shadow: rgba(0,0,0,0.7);
+    }
+
+    /* 頁首 */
+    header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 3rem;
+      letter-spacing: 2px;
+    }
+    header p {
+      margin-top: 10px;
+      font-size: 1.3rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+    
+    /* 主題切換按鈕 */
+    #theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s, color 0.3s;
+}
+    #theme-toggle:hover {
+      background-color: white;
+      color: var(--primary-color);
+    }
+
+    /* 主要內容區 */
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    section {
+      margin-bottom: 50px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s forwards;
+    }
+    section:nth-child(1) { animation-delay: 0.2s; }
+    section:nth-child(2) { animation-delay: 0.4s; }
+    section:nth-child(3) { animation-delay: 0.6s; }
+    section:nth-child(4) { animation-delay: 0.8s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      border-bottom: 3px solid var(--primary-color);
+      padding-bottom: 10px;
+      margin-bottom: 25px;
+      color: var(--primary-color);
+      font-size: 1.8rem;
+      letter-spacing: 1.5px;
+    }
+
+    /* 個人照片 */
+    .profile-pic {
+      float: right;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-left: 25px;
+      border: 4px solid var(--primary-color);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: transform 0.3s;
+    }
+    .profile-pic:hover {
+      transform: scale(1.05);
+    }
+
+    /* 清單樣式 */
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    ul li {
+      margin-bottom: 12px;
+      line-height: 1.6;
+      font-size: 1.1rem;
+    }
+
+    /* 技能區 */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .skill-item {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+      transition: background-color 0.3s;
+      cursor: default;
+    }
+    .skill-item:hover {
+      background-color: #357ABD;
+    }
+
+    /* 進度條 */
+    .skill-bar {
+      margin-top: 8px;
+      background-color: #ddd;
+      border-radius: 12px;
+      overflow: hidden;
+      height: 14px;
+      width: 100%;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+    }
+    .skill-level {
+      height: 100%;
+      background-color: var(--primary-color);
+      width: 0;
+      border-radius: 12px;
+      transition: width 1.5s ease-in-out;
+    }
+
+    /* 專案區 */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 25px;
+    }
+    .project-card {
+      background-color: var(--card-bg);
+      box-shadow: 0 4px 12px var(--card-shadow);
+      border-radius: 12px;
+      padding: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px var(--card-shadow);
+    }
+    .project-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+    .project-desc {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--text-color);
+    }
+    .project-link {
+      margin-top: 15px;
+      display: inline-block;
+      color: var(--primary-color);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1.5px solid transparent;
+      transition: border-color 0.3s;
+    }
+    .project-link:hover {
+      border-color: var(--primary-color);
+    }
+
+    /* 聯絡方式 */
+    .contact-list li {
+      font-size: 1.1rem;
+      margin-bottom: 14px;
+    }
+    .contact-list a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .contact-list a:hover {
+      color: #357ABD;
+      text-decoration: underline;
+    }
+
+    /* 頁尾 */
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      background-color: #e1e8f7;
+      color: #555;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      user-select: none;
+    }
+    [data-theme="dark"] footer {
+      background-color: #222;
+      color: #aaa;
+    }
+
+    /* 回頂按鈕 */
+    #back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 1000;
+    }
+    #back-to-top.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* 響應式 */
+    @media (max-width: 600px) {
+      .profile-pic {
+        float: none;
+        display: block;
+        margin: 0 auto 25px auto;
+      }
+      .skills {
+        justify-content: center;
+      }
+    }
+    /* 導覽選單樣式 */
+.navbar {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.hamburger {
+  background: white;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: none;
+}
+
+.nav-links {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #ffd700;
+}
+
+/* 手機版樣式 */
+@media (max-width: 768px) {
+  .hamburger {
+    display: inline-block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    background-color: var(--primary-color);
+    padding: 15px 0;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>蕭聖展</h1>
+    <p>龍華科技大學 / 資訊網路工程系</p>
+    <button id="theme-toggle" aria-label="切換主題">切換主題</button>
+    <nav class="navbar">
+  <button class="hamburger" aria-label="開啟選單">&#9776;</button>
+  <ul class="nav-links">
+    <li><a href="#about">關於我</a></li>
+    <li><a href="#experience">資歷經歷</a></li>
+    <li><a href="#skills">技能專長</a></li>
+    <li><a href="#projects">專案展示</a></li>
+    <li><a href="#contact">聯絡方式</a></li>
+  </ul>
+</nav>
+  </header>
+
+  <main>
+    <section id="about">
+      <img src="https://i.imgur.com/3Yjsmrm.jpeg" alt="蕭聖展的照片" class="profile-pic" />
+      <h2>關於我</h2>
+      <p>
+        我是蕭聖展，就讀於龍華科技大學資訊網路工程系，具備網路與程式設計基礎。
+        積極學習新技術，期望未來能投身科技產業發揮所長。
+      </p>
+    </section>
+
+    <section id="experience">
+      <h2>資歷經歷</h2>
+      <ul>
+        <li><strong>龍華科技大學</strong> — 資訊網路工程系 (2021 - 2025)<br />修習網路技術、程式設計、資安等課程，累積紮實的資訊背景。</li>
+        <li><strong>個人專案</strong><br />完成多項課堂與自發性專案，如簡易網站開發、網路模擬與小型應用程式設計。</li>
+        <li><strong>團隊合作經驗</strong><br />在課堂專題中與團隊合作，規劃分工與協作，提升專案管理與溝通能力。</li>
+      </ul>
+    </section>
+
+    <section id="skills">
+      <h2>技能專長</h2>
+      <div class="skills">
+        <div class="skill-item" data-level="85">C++</div>
+        <div class="skill-item" data-level="50">HTML5 & CSS3</div>
+        <div class="skill-item" data-level="75">Python</div>
+        <div class="skill-item" data-level="50">C#</div>
+        <div class="skill-item" data-level="50">Java</div>
+      </div>
+      <div style="margin-top: 20px;">
+        <div style="margin-bottom: 12px;">
+          <strong>Python</strong>
+          <div class="skill-bar"><div class="skill-level" style="width: 80%;"></div></div>
+        </div>
+        <div style="margin-bottom: 12px;">
+          <strong>C++</strong>
+          <div class="skill-bar"><div class="skill-level" style="width: 65%;"></div></div>
+        </div>
+        <div style="margin-bottom: 12px;">
+          <strong>C#</strong>
+          <div class="skill-bar"><div class="skill-level" style="width: 50%;"></div></div>
+        </div>
+        <div style="margin-bottom: 12px;">
+          <strong>Java</strong>
+          <div class="skill-bar"><div class="skill-level" style="width: 50%;"></div></div>
+        </div>
+        <div style="margin-bottom: 12px;">
+          <strong>HTML5 & CSS3</strong>
+          <div class="skill-bar"><div class="skill-level" style="width: 35%;"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>專案展示</h2>
+      <div class="projects">
+        <div class="project-card" tabindex="0">
+          <div class="project-title">AI多媒體創作</div>
+          <div class="project-desc">這是一個結合人工智慧技術的多媒體，展示利用AI生成的圖片等創作。</div>
+          <a href="project1.html" target="_blank" class="project-link" rel="noopener">查看專案</a>
+        </div>
+        <div class="project-card" tabindex="0">
+          <div class="project-title">網路模擬工具</div>
+          <div class="project-desc">開發一款簡易的網路封包模擬工具，幫助理解網路通訊原理。</div>
+          <a href="project2.html" target="_blank" class="project-link" rel="noopener">查看專案</a>
+        </div>
+        <div class="project-card" tabindex="0">
+          <div class="project-title">小型應用程式</div>
+          <div class="project-desc">設計一款桌面應用程式，實現任務管理與提醒功能。</div>
+          <a href="project3.html" target="_blank" class="project-link" rel="noopener">查看專案</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>聯絡方式</h2>
+      <ul class="contact-list">
+        <li>Email: <a href="mailto:Scandalzhan@gmail.com">Scandalzhan@gmail.com</a></li>
+        <li>電話: <a href="tel:0981540280">0981-540-280</a></li>
+        <li>Line: 0981-540-280</li>
+      </ul>
+    </section>
+  </main>
+
+
+  <footer>
+    &copy; 2025 蕭聖展。版權所有。
+  </footer>
+
+  <button id="back-to-top" aria-label="回到頂部" title="回到頂部">&#8679;</button>
+
+  <script>
+    // 主題切換功能
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    if(currentTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      themeToggleBtn.textContent = '淺色模式';
+    } else {
+      themeToggleBtn.textContent = '深色模式';
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      if(document.documentElement.getAttribute('data-theme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        themeToggleBtn.textContent = '深色模式';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        themeToggleBtn.textContent = '淺色模式';
+      }
+    });
+
+    // 技能進度條動畫
+    window.addEventListener('load', () => {
+      const skillItems = document.querySelectorAll('.skills .skill-item');
+      const skillBars = document.querySelectorAll('.skill-bar .skill-level');
+      skillItems.forEach((item, index) => {
+        const level = item.getAttribute('data-level');
+        if(skillBars[index]) {
+          setTimeout(() => {
+            skillBars[index].style.width = level + '%';
+          }, 500 + index * 300);
+        }
+      });
+    });
+
+     // 回頂按鈕顯示與功能
+    const backToTopBtn = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 300) {
+        backToTopBtn.classList.add('show');
+      } else {
+        backToTopBtn.classList.remove('show');
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 漢堡選單控制
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+    // 技能進度條動畫
+window.addEventListener('load', () => {
+  const skillBars = document.querySelectorAll('.skill-bar .skill-level');
+  const skillItems = document.querySelectorAll('.skills .skill-item');
+  
+  skillItems.forEach((item, index) => {
+    const level = item.getAttribute('data-level');
+    if (skillBars[index]) {
+      setTimeout(() => {
+        skillBars[index].style.width = level + '%';
+      }, 500 + index * 300);
+    }
+  });
+});
+  </script>
+</body>
+</html>
